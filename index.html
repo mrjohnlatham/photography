@@ -323,12 +323,7 @@ function startHeroTimer(){
 }
 startHeroTimer();
 
-/* tapping/clicking anywhere on the hero jumps into that image's own gallery,
-   starting at the beginning of the gallery rather than at that image */
-homeSection.addEventListener('click', ()=>{
-  const current = heroImages[heroIdx];
-  if (current) openGallery(current.slug);
-});
+/* home hero images are not clickable — purely a passive slideshow */
 
 /* view switching */
 const view = document.getElementById('view');
@@ -409,12 +404,9 @@ function renderInitial(){
 function step(d){
   if (!activeCat) return;
   let newIdx = activeIdx + d;
-  /* completed a full lap through this gallery: reshuffle before starting the next one */
   if (newIdx >= activeCat.items.length){
-    activeCat.items = shuffle(activeCat.items);
     newIdx = 0;
   } else if (newIdx < 0){
-    activeCat.items = shuffle(activeCat.items);
     newIdx = activeCat.items.length - 1;
   }
   activeIdx = newIdx;
